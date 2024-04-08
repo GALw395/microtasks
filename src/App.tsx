@@ -1,34 +1,33 @@
 
-import { useState } from 'react';
 import './App.css';
-import { NewComponent } from './NewComponent';
-import { Cars } from './Cars';
+import { Button } from './components/Button';
 
 function App() {
 
-  const topCars = [
-    { manufacturer: 'BMW', model: 'X5' },
-    { manufacturer: 'Mersedes', model: 'MLS' },
-    { manufacturer: 'Audi', model: 'Q7' }
-  ]
+  
 
+  const Button1Foo = (el: string, age: number) => {
+    console.log(el, age)
+       
+  }
 
-  let [students, setStudents] = useState([
-    { id: 1, name: 'James', age: 8 },
-    { id: 2, name: 'Robert', age: 18 },
-    { id: 3, name: 'John', age: 28 },
-    { id: 4, name: 'David', age: 38 },
-    { id: 5, name: 'Thomas', age: 48 },
-    { id: 6, name: 'Richard', age: 58 },
-  ])
+  const Button2Foo = (el: string, age: number) => {
+    console.log(el, age)
+  }
+
+  const Button3Foo = () => {
+    console.log('stupid')
+  }
 
 
 
   return (
-    <>
-      <NewComponent students={students} />
-      <Cars topCars={topCars} />
-    </>
+
+    <div>
+      <Button name = {'My chanel - 1'} callBack={()=>Button1Foo('1', 20)}/>
+      <Button name = {'My chanel - 2'} callBack={()=>Button2Foo('2', 25)}/>
+      <Button name = {'My chanel - 3'} callBack={Button3Foo}/>
+    </div>
 
   );
 }
