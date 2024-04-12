@@ -1,45 +1,42 @@
 
 import { useState } from 'react';
 import './App.css';
-import { NewComponent } from './NewComponent';
+import { Input } from './components/Input';
+import { Button } from './components/Button';
 
 function App() {
+  const [message, setMessage] = useState([
+    { message: 'message1' },
+    { message: 'message2' },
+    { message: 'message3' }
+  ]
+  )
 
-  
-  type FilterType = 'all' | 'dollar' | 'ruble'
+  let [title, setTitle] = useState('')
 
-
-  const [money, setMoney] = useState([
-    { banknote: "dollar", nominal: 100, number: "a123456789" },
-    { banknote: "dollar", nominal: 50, number: "b123456789" },
-    { banknote: "ruble", nominal: 100, number: "c123456789" },
-    { banknote: "dollar", nominal: 100, number: "d123456789" },
-    { banknote: "dollar", nominal: 50, number: "e123456789" },
-    { banknote: "ruble", nominal: 100, number: "f123456789" },
-    { banknote: "dollar", nominal: 50, number: "j123456789" },
-    { banknote: "ruble", nominal: 50, number: "h123456789" }
-  ])
-
-  const [filter, setFilter] = useState<FilterType>('all')
-
-  let currentMoney = money
-
-  if (filter === 'dollar') {
-    currentMoney = money.filter((filteredMoney) => filteredMoney.banknote === 'dollar')
-  }
-  if (filter === 'ruble') {
-    currentMoney = money.filter((filteredMoney) => filteredMoney.banknote === 'ruble')
+  const addMassege = (title: string) => {
+    let newMessage = { message: title }
+    setMessage([newMessage, ...message])
   }
 
-  const onClickFilterHandler = (nameButton: FilterType) => {
-    setFilter(nameButton)
+  const callBackButtonHandler = () => {
+    addMassege(title)
+    setTitle('')
   }
 
   return (
-   
-    <NewComponent currentMoney={currentMoney} onClickFilterHandler={onClickFilterHandler} />
+    <div className={'App'}>
+      
+        <Input setTitle={setTitle} title={title}/>
+        <Button name={'+'} callBack={callBackButtonHandler}/>
 
-  );
+      {message.map((el, index) => {
+        return (
+          <div key={index}>{el.message}</div>
+        )
+      })}
+    </div>
+  )
 }
 
 export default App;
